@@ -40,6 +40,8 @@ import { TreeView } from './tree-view.component';
 import { DerpPipe } from './derp.pipe';
 import { RequirementsService }		from './requirements.service';
 
+import { FeaturesSelectionComponent } 	from './features-selection.component'
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -53,8 +55,10 @@ import { RequirementsService }		from './requirements.service';
         LoginComponent,
         RegisterComponent,
         AuthComponent,
+        // ADD
+        FeaturesSelectionComponent,
         TreeView,
-        DerpPipe
+        DerpPipe,
 	],
 	imports: [
 		BrowserModule,

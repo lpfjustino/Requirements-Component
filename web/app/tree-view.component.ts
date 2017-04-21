@@ -11,8 +11,8 @@ import { RequirementsService }    from './requirements.service';
       {{node._name}} <br>
       <span *ngFor="let req of node.description | derp">
           <input type="checkbox" name="isActive" *ngIf="req?.length > 0" [(ngModel)]="chosen.isActive">
-          <a href="#" (click)="showRequirement(req)">{{req}}</a>
-      </span><br>
+          <a href="#" (click)="showRequirement(req)">{{req}}</a><br>
+      </span>
       <tree-view *ngIf="node.feature" [treeData]="node.feature"></tree-view>
       <tree-view *ngIf="node.and" [treeData]="node.and"></tree-view>
       <tree-view *ngIf="node.or" [treeData]="node.or"></tree-view>
