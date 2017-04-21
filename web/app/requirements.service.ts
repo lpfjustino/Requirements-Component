@@ -8,7 +8,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class RequirementsService {
-	reqs: any[] = [];
+	reqs: any[];
 
 	constructor(private http: Http) {
 	}
@@ -31,10 +31,6 @@ export class RequirementsService {
 	}
 
 	getReqById(rq_stid: string, rq_id: string): Observable<any> {
-		//var reqs;
-		//this.getRequirements().subscribe(res => reqs = res);
-		//var req = reqs.filter(req => req.rq_stid == rq_stid && req.rq_id == rq_id);
-		//return 
 		return this.getRequirements().map(res => {
 			return res.filter((req:any) => req.rq_stid == rq_stid && req.rq_id == rq_id);
 		});
