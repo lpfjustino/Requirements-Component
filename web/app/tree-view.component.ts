@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { DerpPipe} from './derp.pipe';
 import { RequirementsService }    from './requirements.service';
 
@@ -8,9 +8,9 @@ import { RequirementsService }    from './requirements.service';
   template: `
   <ul>
     <li *ngFor="let node of treeData | derp">
-      {{node._name}} <br>
+      <input type="checkbox" name="isActive" *ngIf="node?.length > 0" (click)="choose(node)">
+      {{node._name}} {{node.length}} <br>
       <span *ngFor="let req of node.description | derp">
-          <input type="checkbox" name="isActive" *ngIf="req?.length > 0" [(ngModel)]="chosen.isActive">
           <a href="#" (click)="showRequirement(req)">{{req}}</a><br>
       </span>
       <tree-view *ngIf="node.feature" [treeData]="node.feature"></tree-view>
@@ -27,21 +27,19 @@ import { RequirementsService }    from './requirements.service';
 
 export class TreeView implements OnInit {
   @Input() treeData: [{}];
-  chosen: Chosen;
+  @Output() onChosen = new EventEmitter<string>();
 
-  constructor(private requirementsService: RequirementsService) {
-    
-  }
+  constructor(private requirementsService: RequirementsService) { }
 
-  ngOnInit() {
-    this.chosen = {
-      isActive: false,
-    }
+  choose(feature: string) {
+    this.onChosen.emit(feature);
   }
 
   showRequirement(id: string) {
-    var rq_stid = id.substring(1,4);
+    var rq_stid = id.substring(0,4);
     var rq_id = id.substring(4, id.length);
+
+    console.log(rq_stid, rq_id);
 
     this.requirementsService
           .getReqById(rq_stid, rq_id)

@@ -19,6 +19,10 @@ export class FeaturesSelectionComponent {
     this.recursiveSplit(this.myTree);
   }
 
+  onChosen(feature: string) {
+    console.log(feature);
+  }
+
   recursiveSplit(my_obj: any) {
     // Replace for the object itself
     this.replace(my_obj)
@@ -29,8 +33,12 @@ export class FeaturesSelectionComponent {
   }
 
   replace(obj: any) {
-    if(obj.description != undefined)
+    if(obj.description != undefined) {
+      // Remove whitespaces
+      obj.description = obj.description.replace(" ", "");
+      // Cast to array
       obj.description = obj.description.split(',');
+    }
 
     if(obj.feature != undefined) 
       this.recursiveSplit(obj.feature);
