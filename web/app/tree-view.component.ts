@@ -31,9 +31,9 @@ export class TreeView {
     
   }
 
-  showRequirement(id) {
+  showRequirement(id: string) {
     var rq_stid = id.substring(1,5);
-    var rq_id = id.substring(5, id.length));
+    var rq_id = id.substring(5, id.length);
 
     this.requirementsService
           .getReqById(rq_stid, rq_id)
