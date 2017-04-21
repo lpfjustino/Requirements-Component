@@ -8,17 +8,14 @@ import { RequirementsService }    from './requirements.service';
   template: `
   <ul>
     <li *ngFor="let node of treeData | derp">
-      <input type="checkbox" name="isActive" *ngIf="node?.length > 0" (click)="choose(node)">
-      {{node._name}} {{node.length}} <br>
+      <input type="checkbox" name="isActive" *ngIf="node._name?.length > 0" (click)="choose(node)">
+      {{node._name}}<br>
       <span *ngFor="let req of node.description | derp">
           <a href="#" (click)="showRequirement(req)">{{req}}</a><br>
       </span>
       <tree-view *ngIf="node.feature" [treeData]="node.feature"></tree-view>
       <tree-view *ngIf="node.and" [treeData]="node.and"></tree-view>
       <tree-view *ngIf="node.or" [treeData]="node.or"></tree-view>
-      
-
-      
       </li>
   </ul>
 
