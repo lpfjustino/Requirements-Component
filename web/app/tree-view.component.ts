@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {DerpPipe} from './derp.pipe';
+import { Component, Input, OnInit } from '@angular/core';
+import { DerpPipe} from './derp.pipe';
 import { RequirementsService }    from './requirements.service';
 
 
@@ -9,9 +9,10 @@ import { RequirementsService }    from './requirements.service';
   <ul>
     <li *ngFor="let node of treeData | derp">
       {{node._name}} <br>
-      > <span *ngFor="let req of node.description | derp">
+      <span *ngFor="let req of node.description | derp">
+          <input type="checkbox" name="isActive" *ngIf="req?.length > 0" [(ngModel)]="chosen.isActive">
           <a href="#" (click)="showRequirement(req)">{{req}}</a>
-        </span>
+      </span><br>
       <tree-view *ngIf="node.feature" [treeData]="node.feature"></tree-view>
       <tree-view *ngIf="node.and" [treeData]="node.and"></tree-view>
       <tree-view *ngIf="node.or" [treeData]="node.or"></tree-view>
@@ -24,16 +25,23 @@ import { RequirementsService }    from './requirements.service';
   `
 })
 
-export class TreeView {
+export class TreeView implements OnInit {
   @Input() treeData: [{}];
+  chosen: Chosen;
 
   constructor(private requirementsService: RequirementsService) {
     
   }
 
+  ngOnInit() {
+    this.chosen = {
+      isActive: false,
+    }
+  }
+
   showRequirement(id: string) {
-    var rq_stid = id.substring(1,5);
-    var rq_id = id.substring(5, id.length);
+    var rq_stid = id.substring(1,4);
+    var rq_id = id.substring(4, id.length);
 
     this.requirementsService
           .getReqById(rq_stid, rq_id)
@@ -43,3 +51,7 @@ export class TreeView {
   }
 }
 
+
+export interface Chosen {
+  isActive? : boolean;
+}

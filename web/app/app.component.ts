@@ -55,7 +55,7 @@ export class AppComponent {
  	myTree =
 				[
 				{
-				"description": "EROIS",
+				"description": "",
 				"and": [
 					{
 						"description": "RFFR - 007 Requirements",
