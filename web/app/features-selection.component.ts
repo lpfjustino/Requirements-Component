@@ -6,21 +6,25 @@ import { Observable }         from "rxjs/Observable";
 
 import { RequirementsService }    from './requirements.service';
 
-
 @Component({
   moduleId: module.id,
   selector: 'features-selection',
   templateUrl: 'features-selection.html',
-  styleUrls: ['features-selection.css']
+  styleUrls: ['features-selection.css'],
 })
 
 export class FeaturesSelectionComponent {
+  chosen: string[] = [];
+  
   constructor() {
     this.recursiveSplit(this.myTree);
   }
 
   onChosen(feature: string) {
+    alert(feature);
     console.log(feature);
+    this.chosen.push(feature);
+    console.log(this.chosen);
   }
 
   recursiveSplit(my_obj: any) {
