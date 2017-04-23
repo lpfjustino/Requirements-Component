@@ -76,6 +76,7 @@ import { FeaturesSelectionComponent } 	from './features-selection.component'
 		VersionService,
 		StatisticsService,
 		RequirementsService,
+		AppConfig,
 		
 		// Authentication providers
         AuthGuard,

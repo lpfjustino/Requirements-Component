@@ -1,8 +1,6 @@
 import { Component }        from '@angular/core';
-import { NgModel }          from '@angular/forms';
-
-import 'rxjs/Rx';
-import { Observable }         from "rxjs/Observable";
+import { Headers, Http }   from '@angular/http';
+import { AppConfig } from './app.config';
 
 import { RequirementsService }    from './requirements.service';
 
@@ -16,13 +14,12 @@ import { RequirementsService }    from './requirements.service';
 export class FeaturesSelectionComponent {
   chosen: string[] = [];
 
-  constructor() {
+  constructor(private http: Http, private config: AppConfig) {
     this.recursiveSplit(this.myTree);
   }
 
+  // Manages a list of requirements chosen across any child node
   onChosen(feature: string) {
-    console.log(feature);
-    
     var element = this.chosen.indexOf(feature);
     // If the item doesn't exist, insert if on the list
     if(element == -1)
@@ -32,6 +29,18 @@ export class FeaturesSelectionComponent {
       this.chosen.splice(element, 1);
   }
 
+  onSubmit() {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    this.http
+      .post(this.config.apiUrl + '/features/userChoice', JSON.stringify(this.chosen), {
+        headers: headers
+      }).subscribe(res => console.log('Response', res));
+  }
+
+  // Arrayifies all nodes casting a string of elements
+  // separated by ','s to a array of strings
   recursiveSplit(my_obj: any) {
     // Replace for the object itself
     this.replace(my_obj)
