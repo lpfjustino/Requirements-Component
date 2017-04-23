@@ -15,16 +15,21 @@ import { RequirementsService }    from './requirements.service';
 
 export class FeaturesSelectionComponent {
   chosen: string[] = [];
-  
+
   constructor() {
     this.recursiveSplit(this.myTree);
   }
 
   onChosen(feature: string) {
-    alert(feature);
     console.log(feature);
-    this.chosen.push(feature);
-    console.log(this.chosen);
+    
+    var element = this.chosen.indexOf(feature);
+    // If the item doesn't exist, insert if on the list
+    if(element == -1)
+      this.chosen.push(feature);
+    // Otherwise remove (checkbox unmarked)
+    else
+      this.chosen.splice(element, 1);
   }
 
   recursiveSplit(my_obj: any) {

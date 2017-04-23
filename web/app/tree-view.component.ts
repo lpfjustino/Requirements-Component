@@ -28,12 +28,12 @@ export class TreeView implements OnInit {
 
   constructor(private requirementsService: RequirementsService) { }
 
-  // Function that handles choices of current level's requirements
+  // Function that handles choices of current level's features
   choose(feature: string) {
     this.notify.emit(feature);
   }
 
-  // Function that handles choices of underlying level's requirements
+  // Function that handles choices of underlying level's features
   childChoice(choice: string) {
     this.notify.emit(choice);
   }
