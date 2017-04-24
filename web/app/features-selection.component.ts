@@ -53,7 +53,7 @@ export class FeaturesSelectionComponent {
   replace(obj: any) {
     if(obj.description != undefined) {
       // Remove whitespaces
-      obj.description = obj.description.replace(" ", "");
+      obj.description = obj.description.replace(/ /g, '');
       // Cast to array
       obj.description = obj.description.split(',');
     }
